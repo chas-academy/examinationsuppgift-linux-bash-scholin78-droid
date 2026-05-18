@@ -10,15 +10,15 @@ fi
 
 # Uppgift 2, skapa användare
 
-for NEWUSER in "$@"; do
-	useradd -m -s /bin/bash "@NEWUSER"
+for USERNAME in "$@"; do
+	useradd -m -s /bin/bash "@USERNAME"
 
-	HOME_DIR="/home/$NEWUSER"
+	HOME_DIR="/home/$USERNAME"
 
 	mkdir -p "$HOME_DIR"/{Documents,Download,Work}
 
 	chmod 700 "$HOME_DIR"
 
-	echo "Välkommen @NEWUSER" > "$HOME_DIR/welcome.txt"
+	echo "Välkommen @USERNAME" > "$HOME_DIR/welcome.txt"
 
 done
