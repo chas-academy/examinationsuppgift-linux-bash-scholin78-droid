@@ -9,16 +9,32 @@ else
 fi
 
 # Uppgift 2, skapa användare
+# Testar om argument med användare har skickats
+if [ $# -eq 0 ]; then
+    echo "Användning: $0 användarnamn1 användarnamn2 ..."
+    exit 1
+fi
 
-for USERNAME in "$@"; do
-	useradd -m -s /bin/bash "@USERNAME"
+# Loopar igenom varje användare / argument
+for username in "$@"; do
+	# Skapa användaren
+	useradd -m "$username"
 
-	HOME_DIR="/home/$USERNAME"
+	# Kontrollerar om det gick att skapa användaren
+	if [ $? -eq 0 ]; then
+		echo "Användare '$username' skapad."
 
-	mkdir -p "$HOME_DIR"/{Documents,Download,Work}
+		# Sätta upp kataloger
+        mkdir -p "/home/$username/Documents"
+        mkdir -p "/home/$username/Download"
+       	 mkdir -p "/home/$username/Work"	
+		
+		# Sätta rättigheter
+        chown -R "$username:$username" "/home/$username"
+		chmod 700 "/home/$username"
 
-	chmod 700 "$HOME_DIR"
-
-	echo "Välkommen @USERNAME" > "$HOME_DIR/welcome.txt"
-
+		echo "Kataloger skapade för '$username'."
+    else
+        echo "Fel: Kunde inte skapa användare '$username'."
+    fi
 done
