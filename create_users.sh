@@ -19,24 +19,24 @@ fi
 for user in "$@"; do
 	# Kontrollera om användaren redan finns
     # if id "$user" &>/dev/null; then
-	if getent passwd "$user" > /dev/null; then
-        echo "Användaren finns redan — hoppar över $user"
-		continue
-    fi
-	# Skapa användaren
-	useradd -m "$user"
-	echo "Användare $user skapad"
+	# if getent passwd "$user" > /dev/null; then
+    #    echo "Användaren finns redan — hoppar över $user"
+	#	continue
+    # fi
 	
+	# Skapa användaren
+	useradd -m "$user" 2>/dev/null
+	echo "Användare $user skapad"
 done
 
 	# Kontrollerar om det gick att skapa användaren
 	# if [ $? -eq 0 ]; then
 	#	echo "Användare '$user' skapad."
 
-		# Sätta upp kataloger
-     #  mkdir -p "/home/$user/Documents"
-     #  mkdir -p "/home/$user/Download"
-     # 	mkdir -p "/home/$user/Work"	
+		# Sätta upp katalog
+mkdir -p "/home/$user/Documents"
+mkdir -p "/home/$user/Download"
+mkdir -p "/home/$user/Work"	
 		
 		# Sätta rättigheter
      #  chown -R "$user:$user" "/home/$user"
