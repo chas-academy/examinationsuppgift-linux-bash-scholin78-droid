@@ -10,10 +10,10 @@ fi
 
 # Uppgift 2, skapa användare
 # Testar om argument med användare har skickats
-if [ "$#" -lt 1 ]; then
-    echo "Användning: $0 användarnamn1 användarnamn2 ..."
-    exit 1
-fi
+#if [ "$#" -lt 1 ]; then
+#    echo "Användning: $0 användarnamn1 användarnamn2 ..."
+#    exit 1
+#fi
 
 # Loopar igenom varje användare / argument
 for username in "$@"; do
@@ -21,8 +21,8 @@ for username in "$@"; do
     if id "$username" &>/dev/null; then
         echo "Användaren finns redan — hoppar över $username"
     else
-	# Skapa användaren
-	useradd -m "$username"
+		# Skapa användaren
+		useradd -m "$username" || exit 1
 	fi
 done
 
