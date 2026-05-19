@@ -16,36 +16,37 @@ fi
 #fi
 
 # Loopar igenom varje användare / argument
-for username in "$@"; do
+for user in "$@"; do
 	# Kontrollera om användaren redan finns
-    if id "$username" &>/dev/null; then
-        echo "Användaren finns redan — hoppar över $username"
+    if id "$user" &>/dev/null; then
+        echo "Användaren finns redan — hoppar över $user"
+		continue
     else
 		# Skapa användaren
-		useradd -m "$username" || exit 1
+		useradd -m "$user"
 	fi
 done
 
 	# Kontrollerar om det gick att skapa användaren
 	# if [ $? -eq 0 ]; then
-	#	echo "Användare '$username' skapad."
+	#	echo "Användare '$user' skapad."
 
 		# Sätta upp kataloger
-     #  mkdir -p "/home/$username/Documents"
-     #  mkdir -p "/home/$username/Download"
-     # 	mkdir -p "/home/$username/Work"	
+     #  mkdir -p "/home/$user/Documents"
+     #  mkdir -p "/home/$user/Download"
+     # 	mkdir -p "/home/$user/Work"	
 		
 		# Sätta rättigheter
-     #  chown -R "$username:$username" "/home/$username"
-	 #	chmod 700 "/home/$username"
+     #  chown -R "$user:$user" "/home/$user"
+	 #	chmod 700 "/home/$user"
 
-	 #	echo "Kataloger skapade för '$username'."
+	 #	echo "Kataloger skapade för '$user'."
 
 		# Skapa välkomstmeddelande
-	 #  echo "Välkommen $username" > "/home/$username/welcome.txt"
+	 #  echo "Välkommen $user" > "/home/$user/welcome.txt"
     # else
-    #    echo "Fel: Kunde inte skapa användare '$username'."
+    #    echo "Fel: Kunde inte skapa användare '$user'."
     # fi
 # done
 
-exit 0
+
