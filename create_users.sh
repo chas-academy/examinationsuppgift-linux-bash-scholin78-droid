@@ -18,13 +18,15 @@ fi
 # Loopar igenom varje användare / argument
 for user in "$@"; do
 	# Kontrollera om användaren redan finns
-    if id "$user" &>/dev/null; then
+    # if id "$user" &>/dev/null; then
+	if getent passwd "$user" > /dev/null; then
         echo "Användaren finns redan — hoppar över $user"
 		continue
-    else
-		# Skapa användaren
-		useradd -m "$user"
-	fi
+    fi
+	# Skapa användaren
+	useradd -m "$user"
+	echo "Användare $user skapad"
+	
 done
 
 	# Kontrollerar om det gick att skapa användaren
