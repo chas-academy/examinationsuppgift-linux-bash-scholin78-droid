@@ -10,7 +10,7 @@ fi
 
 # Uppgift 2, skapa användare
 # Testar om argument med användare har skickats
-if [ $# -eq 0 ]; then
+if [ "$#" -lt 1 ]; then
     echo "Användning: $0 användarnamn1 användarnamn2 ..."
     exit 1
 fi
