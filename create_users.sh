@@ -24,25 +24,28 @@ for username in "$@"; do
 	# Skapa användaren
 	useradd -m "$username"
 	fi
+done
 
 	# Kontrollerar om det gick att skapa användaren
-	if [ $? -eq 0 ]; then
-		echo "Användare '$username' skapad."
+	# if [ $? -eq 0 ]; then
+	#	echo "Användare '$username' skapad."
 
 		# Sätta upp kataloger
-        mkdir -p "/home/$username/Documents"
-        mkdir -p "/home/$username/Download"
-       	mkdir -p "/home/$username/Work"	
+     #  mkdir -p "/home/$username/Documents"
+     #  mkdir -p "/home/$username/Download"
+     # 	mkdir -p "/home/$username/Work"	
 		
 		# Sätta rättigheter
-        chown -R "$username:$username" "/home/$username"
-		chmod 700 "/home/$username"
+     #  chown -R "$username:$username" "/home/$username"
+	 #	chmod 700 "/home/$username"
 
-		echo "Kataloger skapade för '$username'."
+	 #	echo "Kataloger skapade för '$username'."
 
 		# Skapa välkomstmeddelande
-		echo "Välkommen $username" > "/home/$username/welcome.txt"
-    else
-        echo "Fel: Kunde inte skapa användare '$username'."
-    fi
-done
+	 #  echo "Välkommen $username" > "/home/$username/welcome.txt"
+    # else
+    #    echo "Fel: Kunde inte skapa användare '$username'."
+    # fi
+# done
+
+exit 0
