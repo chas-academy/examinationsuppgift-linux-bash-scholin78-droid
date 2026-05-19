@@ -17,8 +17,13 @@ fi
 
 # Loopar igenom varje användare / argument
 for username in "$@"; do
+	# Kontrollera om användaren redan finns
+    if id "$username" &>/dev/null; then
+        echo "Användaren finns redan — hoppar över $username"
+    else
 	# Skapa användaren
 	useradd -m "$username"
+	fi
 
 	# Kontrollerar om det gick att skapa användaren
 	if [ $? -eq 0 ]; then
