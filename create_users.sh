@@ -1,19 +1,23 @@
 #!/bin/bash
 
 # Uppgift 1, kontrollera om användaren är root
-if test $UID = 0; then
-	echo "Du är root"
-else
-	echo "Detta script måste köras som root."
-	exit 1
+#if test $UID = 0; then
+#	echo "Du är root"
+#else
+#	echo "Detta script måste köras som root."
+#	exit 1
+#fi
+if [ "$EUID" -ne 0 ]; then
+    echo "Fel: Detta script måste köras som root."
+    exit 1
 fi
 
 # Uppgift 2, skapa användare
 # Testar om argument med användare har skickats
-#if [ "$#" -lt 1 ]; then
-#    echo "Användning: $0 användarnamn1 användarnamn2 ..."
-#    exit 1
-#fi
+if [ "$#" -lt 1 ]; then
+    echo "Användning: $0 användarnamn1 användarnamn2 ..."
+    exit 1
+fi
 
 # Loopar igenom varje användare / argument
 for user in "$@"; do
